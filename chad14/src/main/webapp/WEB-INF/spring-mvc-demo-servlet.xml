@@ -30,6 +30,12 @@
     <util:properties id="countryOptions" location="classpath:countries.properties" />
     <util:properties id="languageOptions" location="classpath:languages.properties" />
 
+    <bean id="messageSource"
+          class="org.springframework.context.support.ResourceBundleMessageSource">
+
+        <property name="basenames" value="messages" />
+
+    </bean>
 </beans>
 
 
