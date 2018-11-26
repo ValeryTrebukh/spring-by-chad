@@ -1,23 +1,28 @@
 package com.jhedeen.chad14;
 
 
+import com.jhedeen.chad14.validation.CourseCode;
+
 import javax.validation.constraints.*;
 
 public class Customer {
 
     private String firstName;
 
-    @NotNull(message="is required")
-    @Size(min=1, message="is required")
+    @NotNull(message = "is required")
+    @Size(min = 1, message = "is required")
     private String lastName;
 
-    @NotNull(message="is required")
+    @NotNull(message = "is required")
     @Min(value = 0, message = "must be greater than zero")
     @Max(value = 10, message = "must be less than ten")
     private Integer freePasses;
 
     @Pattern(regexp = "^[a-zA-Z0-9]{5}", message = "only 5 chars allowed")
     private String postalCode;
+
+    @CourseCode(value = "TOP", message = "must starts with TOP")
+    private String courseCode;
 
     public String getFirstName() {
         return firstName;
@@ -49,5 +54,13 @@ public class Customer {
 
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
+    }
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
     }
 }

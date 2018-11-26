@@ -12,6 +12,9 @@
     <br>
 
     Postal code: ${customer.postalCode}
+    <br>
+
+    Postal code: ${customer.courseCode}
 
 </body>
 </html>
