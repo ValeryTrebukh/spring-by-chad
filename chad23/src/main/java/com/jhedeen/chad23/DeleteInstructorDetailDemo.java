@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class DeleteDemo {
+public class DeleteInstructorDetailDemo {
     public static void main(String[] args) {
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")
@@ -17,16 +17,16 @@ public class DeleteDemo {
         Session session = factory.getCurrentSession();
 
         try {
-
             session.beginTransaction();
 
-            int id = 1;
-            Instructor instructor = session.get(Instructor.class, id);
-            System.out.println(instructor);
+            int id = 4;
+            InstructorDetail instructorDetail = session.get(InstructorDetail.class, id);
+            System.out.println(instructorDetail);
+            instructorDetail.getInstructor().setInstructorDetail(null);
 
-            if(instructor!=null) {
-                System.out.println("Deleting " + instructor);
-                session.delete(instructor);
+            if(instructorDetail!=null) {
+                System.out.println("Deleting " + instructorDetail);
+                session.delete(instructorDetail);
             }
             session.getTransaction().commit();
             System.out.println("Done!");
