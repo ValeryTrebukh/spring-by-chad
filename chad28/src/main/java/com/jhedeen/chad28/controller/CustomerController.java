@@ -1,10 +1,11 @@
 package com.jhedeen.chad28.controller;
 
-import com.jhedeen.chad28.dao.CustomerDAO;
 import com.jhedeen.chad28.entity.Customer;
+import com.jhedeen.chad28.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -14,13 +15,13 @@ import java.util.List;
 public class CustomerController {
 
     @Autowired
-    private CustomerDAO customerDAO;
+    private CustomerService customerService;
 
 
-    @RequestMapping("/list")
+    @GetMapping("/list")
     public String listCustomers(Model model) {
 
-        List<Customer> customers = customerDAO.getCustomers();
+        List<Customer> customers = customerService.getCustomers();
 
         model.addAttribute("customers", customers);
 
