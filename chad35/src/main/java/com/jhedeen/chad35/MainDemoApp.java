@@ -12,6 +12,8 @@ public class MainDemoApp {
 
         AccountDao accountDao = context.getBean("accountDao", AccountDao.class);
         Account account = new Account();
+        account.setName("Bill");
+        account.setLevel("gold");
         accountDao.addAccount(account, true);
         accountDao.doWork();
         accountDao.setName("one");
