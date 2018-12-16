@@ -2,10 +2,7 @@ package com.jhedeen.chad35.aspect;
 
 import com.jhedeen.chad35.Account;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -68,6 +65,13 @@ public class MyDemoLoggingAspect {
         System.out.println("========>  Executing @AfterThrowing method " + method);
 
         System.out.println("=======>  Exception is: " + exec);
+    }
+
+    @After("execution(* com.jhedeen.chad35.dao.AccountDao.findAccounts(..))")
+    public void afterFinallyFindAccountAdvice(JoinPoint joinPoint) {
+
+        String method = joinPoint.getSignature().toShortString();
+        System.out.println("========>  Executing @After method " + method);
     }
 
 }
