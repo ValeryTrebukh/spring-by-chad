@@ -3,6 +3,9 @@ package com.jhedeen.chad35.dao;
 import com.jhedeen.chad35.Account;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class AccountDao {
 
@@ -15,6 +18,21 @@ public class AccountDao {
 
     public void doWork() {
         System.out.println(getClass() + " doing smth");
+    }
+
+    public List<Account> findAccounts() {
+        List<Account> myAccounts = new ArrayList<>();
+
+        Account acc1 = new Account("John", "silver");
+        Account acc2 = new Account("Simon", "gold");
+        Account acc3 = new Account("Anna", "platinum");
+
+        myAccounts.add(acc1);
+        myAccounts.add(acc2);
+        myAccounts.add(acc3);
+
+
+        return  myAccounts;
     }
 
     public String getName() {
