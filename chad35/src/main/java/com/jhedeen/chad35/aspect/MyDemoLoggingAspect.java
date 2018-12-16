@@ -3,6 +3,7 @@ package com.jhedeen.chad35.aspect;
 import com.jhedeen.chad35.Account;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -57,6 +58,16 @@ public class MyDemoLoggingAspect {
             String upperName = acc.getName().toUpperCase();
             acc.setName(upperName);
         }
+    }
+
+    @AfterThrowing(pointcut = "execution(* com.jhedeen.chad35.dao.AccountDao.findAccounts(..))",
+                    throwing = "exec")
+    public void afterThrowingFindAccountAdvice(JoinPoint joinPoint, Throwable exec) {
+
+        String method = joinPoint.getSignature().toShortString();
+        System.out.println("========>  Executing @AfterThrowing method " + method);
+
+        System.out.println("=======>  Exception is: " + exec);
     }
 
 }
