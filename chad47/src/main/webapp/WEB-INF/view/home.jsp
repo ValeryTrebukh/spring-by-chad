@@ -19,8 +19,23 @@
 
     <hr>
 
-    <form:form action="${pageContext.request.contextPath}/logout" method="post" >
+    <security:authorize access="hasRole('MODERATOR')">
+        <p>
+            <a href="${pageContext.request.contextPath}/leaders">LeaderShip Meeting</a>
+            (Only for manager people)
+        </p>
+        <hr>
+    </security:authorize>
 
+    <security:authorize access="hasRole('ADMIN')">
+        <p>
+            <a href="${pageContext.request.contextPath}/systems">Administration</a>
+            (Only for admins)
+        </p>
+        <hr>
+    </security:authorize>
+
+    <form:form action="${pageContext.request.contextPath}/logout" method="post" >
         <input type="submit" value="Logout"/>
     </form:form>
 </body>
