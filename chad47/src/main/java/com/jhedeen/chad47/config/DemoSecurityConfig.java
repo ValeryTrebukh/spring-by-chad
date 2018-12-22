@@ -1,30 +1,30 @@
 package com.jhedeen.chad47.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
+
+import javax.sql.DataSource;
 
 
 @Configuration
 @EnableWebSecurity
 public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private DataSource securityDataSource;
+
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        User.UserBuilder users = User.withDefaultPasswordEncoder();
-
-        auth.inMemoryAuthentication()
-                .withUser(users.username("Bob").password("234").roles("USER"))
-                .withUser(users.username("Tom").password("456").roles("MODERATOR", "USER"))
-                .withUser(users.username("Dean").password("258").roles("ADMIN", "USER"));
+        auth.jdbcAuthentication().dataSource(securityDataSource);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
         http.authorizeRequests()
                 .antMatchers("/").hasRole("USER")
                 .antMatchers("/leaders/**").hasRole("MODERATOR")
