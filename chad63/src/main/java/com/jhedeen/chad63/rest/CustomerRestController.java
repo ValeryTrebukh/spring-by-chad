@@ -3,10 +3,7 @@ package com.jhedeen.chad63.rest;
 import com.jhedeen.chad63.entity.Customer;
 import com.jhedeen.chad63.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,6 +26,14 @@ public class CustomerRestController {
         if(customer == null) {
             throw new CustomerNotFoundException("Customer not found for id " + id);
         }
+
+        return customer;
+    }
+
+    @PostMapping("/customers")
+    public Customer getCustomers(@RequestBody Customer customer) {
+
+        customerService.saveCustomer(customer);
 
         return customer;
     }
